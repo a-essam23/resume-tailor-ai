@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Resume Tailor",
+  "version": "0.0.1",
+  "description": "resume-tailor browser extension",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "contextMenus",
+    "http://localhost:*/"
+  ],
+  "host_permissions": [
+    "https://www.linkedin.com/jobs/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/jobs/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

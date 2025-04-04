@@ -19,12 +19,19 @@
   "author": "Ahmed Essam",
   "license": "MIT",
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "tsx": "^4.19.3"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "jsonresume-theme-professional": "^1.1.0",
+    "resumed": "^4.1.0",
+    "zod": "^3.24.2"
   }
 }
