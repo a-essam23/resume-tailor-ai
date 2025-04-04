@@ -1,0 +1,30 @@
+{
+  "name": "resume-tailor",
+  "version": "0.0.1",
+  "description": "open-source application designed to streamline automating the tailoring of resumes to job descriptions",
+  "main": "tsc index.ts",
+  "scripts": {
+    "start": "node --import=tsx index.ts",
+    "dev": "node --import=tsx --watch index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "resume",
+    "tailor",
+    "job application",
+    "automation",
+    "open-source",
+    "AI"
+  ],
+  "author": "Ahmed Essam",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "tsx": "^4.19.3"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0"
+  }
+}
