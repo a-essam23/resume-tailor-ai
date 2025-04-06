@@ -30,8 +30,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "jsonresume-theme-professional": "^1.1.0",
-    "resumed": "^4.1.0",
+    "handlebars": "^4.7.8",
+    "puppeteer": "^24.6.0",
+    "winston": "^3.17.0",
     "zod": "^3.24.2"
   }
 }
