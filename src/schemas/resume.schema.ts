@@ -129,4 +129,4 @@ export const ResumeSchema = z.object({
   projects: z.array(ProjectSchema).optional(),
 });
 
-export type Resume = z.infer<typeof ResumeSchema>;
+export type IResume = z.infer<typeof ResumeSchema>;

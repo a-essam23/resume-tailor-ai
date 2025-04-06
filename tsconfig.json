@@ -2,16 +2,17 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ES2016",
-    "lib": ["es6"],
+    "lib": ["es6", "ES2021.String"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "baseUrl": "./",
     "paths": {
-      "@assets/*": ["assets/*"],
+      "@helpers/*": ["src/helpers/*"],
       "@schemas/*": ["src/schemas/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@assets/*": ["assets/*"]
     },
     "resolveJsonModule": true,
     "allowJs": true,

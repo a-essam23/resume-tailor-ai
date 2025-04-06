@@ -2,9 +2,9 @@ import { launch } from "puppeteer";
 import Handlebars from "handlebars";
 import { ResumeSchema } from "@/schemas/resume.schema";
 import AppError from "@utils/AppError";
-import { existsSync, readFile, readFileSync, writeFileSync } from "fs";
 import config from "config";
 import { log } from "@utils/logger";
+import { writeFileSync } from "fs";
 
 export const validateResume = (resume: object) => {
   const validatedResume = ResumeSchema.safeParse(resume);
@@ -20,7 +20,11 @@ export const validateResume = (resume: object) => {
   return validatedResume.data;
 };
 
-export const compileResume = (resume: object, template: any) => {
+export const compileResume = (
+  resume: object,
+  template: any,
+  output_dir: string
+) => {
   const compiled = Handlebars.compile(template);
   const context = {
     style: "classic",
@@ -28,11 +32,11 @@ export const compileResume = (resume: object, template: any) => {
     ...resume,
   };
   const htmlOutput = compiled(context);
-  writeFileSync(`${config.OUTPUT_DIR}/resume.html`, htmlOutput);
+  writeFileSync(`${output_dir}/${config.RESUME_OUTPUT_NAME}.html`, htmlOutput);
   return htmlOutput;
 };
 
-export const generatePDF = async (resume_html: string) => {
+export const generatePDF = async (resume_html: string, output_dir: string) => {
   // Add comprehensive print CSS
   const printCSS = `
 <style>
@@ -95,7 +99,7 @@ export const generatePDF = async (resume_html: string) => {
   // PDF options
 
   await page.pdf({
-    path: `${config.OUTPUT_DIR}/resume.pdf`,
+    path: `${output_dir}/${config.RESUME_OUTPUT_NAME}.pdf`,
     format: "A4",
     printBackground: true,
     margin: {

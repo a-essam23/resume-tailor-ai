@@ -1,105 +1,123 @@
-import { Resume } from "@schemas/resume.schema";
+import { IResume } from "@schemas/resume.schema";
 
-const defaultResume: Resume = {
+const defaultResume: IResume = {
   basics: {
-    first_name: "Richard",
-    last_name: "Hendriks",
-    label: "Programmer",
-    image: "",
-    email: "richard.hendriks@mail.com",
-    phone: "912 555-4321",
-    url: "http://richardhendricks.example.com",
+    first_name: "Jane",
+    last_name: "Doe",
+    label: "Front-End Developer",
+    email: "jane.doe@email.com",
+    phone: "+15551234567",
+    url: "https://www.janedoe.com",
     summary:
-      "Richard hails from Tulsa. He has earned degrees from the University of Oklahoma and Stanford. (Go Sooners and Cardinal!) Before starting Pied Piper, he worked for Hooli as a part time software developer. While his work focuses on applied information theory, mostly optimizing lossless compression schema of both the length-limited and adaptive variants, his non-work interests range widely, everything from quantum computing to chaos theory. He could tell you about it, but THAT would NOT be a “length-limited” conversation!",
+      "Highly motivated and creative Front-End Developer with 3 years of experience in building and maintaining responsive and user-friendly web applications. Proficient in React, JavaScript, HTML, and CSS. Passionate about clean code, user experience, and continuous learning.",
     location: {
-      address: "2712 Broadway St",
-      postalCode: "CA 94115",
-      city: "San Francisco",
+      address: "123 Main Street",
+      postalCode: "90210",
+      city: "Beverly Hills",
       countryCode: "US",
-      region: "California",
+      region: "CA",
     },
     profiles: [
       {
-        network: "Twitter",
-        username: "neutralthoughts",
-        url: "https://www.twitter.com",
+        network: "LinkedIn",
+        username: "janedoe",
+        url: "https://www.linkedin.com/in/janedoe",
       },
       {
-        network: "SoundCloud",
-        username: "dandymusicnl",
-        url: "https://soundcloud.example.com/dandymusicnl",
+        network: "GitHub",
+        username: "janedoe",
+        url: "https://github.com/janedoe",
       },
     ],
   },
   work: [
     {
-      name: "Pied Piper",
-      location: "Palo Alto, CA",
-      description: "Awesome compression company",
-      position: "CEO/President",
-      url: "http://piedpiper.example.com",
-      startDate: "2013-12-01",
-      endDate: "2014-12-01",
+      name: "Acme Corp",
+      position: "Front-End Developer",
+      location: "Los Angeles, CA",
+      url: "https://www.acmecorp.com",
+      startDate: "2021-06-01",
+      endDate: "2023-12-20",
       summary:
-        "Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has consistently fielded high Weisman Scores™ that are not merely competitive, but approach the theoretical limit of lossless compression.",
+        "Developed and maintained front-end components for various web applications, ensuring high performance and responsiveness.",
       highlights: [
-        "Build an algorithm for artist to detect if their music was violating copy right infringement laws",
-        "Successfully won Techcrunch Disrupt",
-        "Optimized an algorithm that holds the current world record for Weisman Scores",
+        "Developed and maintained a React-based e-commerce platform, resulting in a 20% increase in conversion rates.",
+        "Implemented responsive design principles, improving user experience across all devices.",
+        "Collaborated with back-end developers to integrate APIs and ensure seamless data flow.",
+        "Contributed to the development of a company-wide design system, promoting consistency and efficiency.",
       ],
     },
-  ],
-  volunteer: [
     {
-      name: "CoderDojo",
-      position: "Teacher",
-      url: "http://coderdojo.example.com/",
-      startDate: "2012-01-01",
-      endDate: "2013-01-01",
-      summary: "Global movement of free coding clubs for young people.",
-      highlights: ["Awarded 'Teacher of the Month'"],
+      name: "Beta Industries",
+      position: "Junior Front-End Developer",
+      location: "Santa Monica, CA",
+      url: "https://www.betaindustries.com",
+      startDate: "2020-06-01",
+      endDate: "2021-06-01",
+      summary:
+        "Assisted senior developers in building and maintaining web applications.",
+      highlights: [
+        "Assisted in the development of a new website using HTML, CSS, and JavaScript.",
+        "Implemented UI/UX improvements based on user feedback.",
+        "Debugged and resolved front-end issues.",
+        "Participated in code reviews and team meetings.",
+      ],
     },
   ],
   education: [
     {
-      institution: "University of Oklahoma",
-      url: "https://www.ou.edu/",
-      area: "Information Technology",
-      studyType: "Bachelor",
-      startDate: "2011-06-01",
-      endDate: "2014-01-01",
-      score: 4.0,
-      courses: ["DB1101 - Basic SQL", "CS2011 - Java Introduction"],
-    },
-  ],
-  awards: [
-    {
-      title: "Digital Compression Pioneer Award",
-      date: "2014-11-01",
-      awarder: "Techcrunch",
-      summary: "There is no spoon.",
-    },
-  ],
-  publications: [
-    {
-      name: "Video compression for 3d media",
-      publisher: "Hooli",
-      releaseDate: "2014-10-01",
-      url: "http://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)",
-      summary:
-        "Innovative middle-out compression algorithm that changes the way we store data.",
+      institution: "University of California, Los Angeles",
+      url: "https://www.ucla.edu",
+      area: "Computer Science",
+      studyType: "Bachelor of Science",
+      startDate: "2016-09-01",
+      endDate: "2020-06-01",
+      score: 3.8,
+      courses: [
+        "Data Structures and Algorithms",
+        "Web Development",
+        "Database Systems",
+        "Software Engineering",
+      ],
     },
   ],
   skills: [
     {
-      name: "Web Development",
-      level: "Master",
-      keywords: ["HTML", "CSS", "Javascript"],
+      name: "JavaScript",
+      level: "Advanced",
+      keywords: ["ES6+", "React", "Redux", "TypeScript", "Node.js"],
     },
     {
-      name: "Compression",
-      level: "Master",
-      keywords: ["Mpeg", "MP4", "GIF"],
+      name: "HTML",
+      level: "Advanced",
+      keywords: ["HTML5", "Semantic HTML"],
+    },
+    {
+      name: "CSS",
+      level: "Advanced",
+      keywords: [
+        "CSS3",
+        "Sass",
+        "Less",
+        "Responsive Design",
+        "Flexbox",
+        "Grid",
+      ],
+    },
+    {
+      name: "UI/UX Design",
+      level: "Intermediate",
+      keywords: ["Figma", "Adobe XD"],
+    },
+    {
+      name: "Testing",
+      level: "Intermediate",
+      keywords: ["Jest", "React Testing Library", "Cypress"],
+    },
+    {
+      name: "Version Control",
+      level: "Advanced",
+      keywords: ["Git", "GitHub", "GitLab"],
     },
   ],
   languages: [
@@ -107,35 +125,25 @@ const defaultResume: Resume = {
       language: "English",
       fluency: "Native speaker",
     },
-  ],
-  interests: [
     {
-      name: "Wildlife",
-      keywords: ["Ferrets", "Unicorns"],
-    },
-  ],
-  references: [
-    {
-      name: "Erlich Bachman",
-      reference:
-        "It is my pleasure to recommend Richard, his performance working as a consultant for Main St. Company proved that he will be a valuable addition to any company.",
+      language: "Spanish",
+      fluency: "Conversational",
     },
   ],
   projects: [
     {
-      name: "Miss Direction",
-      description: "A mapping engine that misguides you",
+      name: "Personal Portfolio Website",
+      startDate: "2023-01-01",
+      endDate: "2023-02-15",
+      description:
+        "A personal portfolio website to showcase my skills and projects.",
       highlights: [
-        "Won award at AIHacks 2016",
-        "Built by all women team of newbie programmers",
-        "Using modern technologies such as GoogleMaps, Chrome Extension and Javascript",
+        "Designed and developed a responsive portfolio website using React.",
+        "Implemented a clean and modern design.",
+        "Deployed the website on Netlify.",
       ],
-      keywords: ["GoogleMaps", "Chrome Extension", "Javascript"],
-      startDate: "2016-08-24",
-      endDate: "2016-08-24",
-      url: "http://missdirection.example.com",
-      roles: ["Team lead", "Designer"],
-      type: "application",
+      url: "https://www.janedoe.com",
+      keywords: ["React", "JavaScript", "HTML", "CSS", "Netlify"],
     },
   ],
 };
