@@ -1,7 +1,7 @@
 {
-  "name": "resume-tailor",
+  "name": "resume-tailor-ai",
   "version": "0.0.1",
-  "description": "open-source application designed to streamline automating the tailoring of resumes to job descriptions",
+  "description": "Open-source resume tailoring automation via browser extension, server, AI analysis, and PDF output.",
   "main": "tsc index.ts",
   "scripts": {
     "start": "node --import=tsx index.ts",

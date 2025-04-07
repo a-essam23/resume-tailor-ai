@@ -5,7 +5,7 @@ export interface IPrompt {
   system?: string;
 }
 
-export const prompt_1: IPrompt = {
+const prompt_1: IPrompt = {
   system: `You are an expert resume tailor. Your task is to revise the provided resume to be highly relevant to the job description. Focus on highlighting skills and experiences mentioned in the job description, rephrasing job responsibilities and achievements to align with the job requirements, and prioritizing the most relevant information. Ensure the output is a valid JSON object representing the tailored resume adhereing to the schema.`,
   message: `Resume Schema:
 ${resumeSchemaString}
@@ -31,3 +31,5 @@ OUTPUT FORMAT:
   }
 `,
 };
+
+export const tailorPrompts = [prompt_1];
