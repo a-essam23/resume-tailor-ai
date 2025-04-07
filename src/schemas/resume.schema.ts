@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+// will be used when prompting to ensure perfect output
+export const resumeSchemaString = `resume{basics{first_name:string,last_name:string,label:string,image?:string,email:string,phone?:string,url?:string,summary:string,location{address:string,postalCode:string,city:string,countryCode:string,region:string},profiles?:[{network:string,username:string,url:string}]},work?:[{name:string,description?:string,position:string,location?:string,url?:string,startDate:string,endDate?:string,summary?:string,highlights:[string]}],volunteer?:sameaswork],education:{institution:string,url?:string,area:string,studyType:string,startDate:string,endDate?:string,score?:number,courses:string]}],awards?:[{title:string,date:string,awarder:string,summary:string}],certificates?:[{name:string,date:string,issuer:string,url?:string}],publications?:[{name:string,publisher:string,releaseDate:string,url?:string,summary:string}],skills:[{name:string,level:"Beginner"|"Intermediate"|"Advanced"|"Master",keywords:[string]}],languages:[{language:string,fluency:string}],interests?:[{name:string,keywords:string]],references?:[{name:string,reference:string}],projects?:[{name:string,startDate:string,endDate?:string,description:string,highlights:[string],url?:string,keywords?:[string],type?:string,roles?:[string]}]}`;
+
 const DateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 const UrlSchema = z.string().url();
 const PhoneSchema = z

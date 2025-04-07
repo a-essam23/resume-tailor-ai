@@ -3,8 +3,11 @@ import config from "config";
 import { existsSync, mkdirSync } from "fs";
 
 // generate directory
-export const createNewDir = (dir: string) =>
-  existsSync(dir) || mkdirSync(dir, { recursive: true });
+export const createNewDir = (dir: string) => {
+  if (existsSync(dir)) return dir;
+  mkdirSync(dir, { recursive: true });
+  return dir;
+};
 
 export const createResumeDir = (application: IJobApplication) => {
   // create a directory under output

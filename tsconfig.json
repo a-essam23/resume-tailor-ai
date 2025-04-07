@@ -7,12 +7,14 @@
     "moduleResolution": "Node",
     "baseUrl": "./",
     "paths": {
+      "@prompts/*": ["src/prompts/*"],
       "@helpers/*": ["src/helpers/*"],
       "@schemas/*": ["src/schemas/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@config": ["config.ts"]
     },
     "resolveJsonModule": true,
     "allowJs": true,
