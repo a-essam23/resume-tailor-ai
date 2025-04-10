@@ -6,9 +6,7 @@ Job application have become incomprehensibly complex, and AI ATS systems become 
 
  This is an attempt at an open-source solution for all to use.
 
-```
-This is an a very early stage project. There are many things that need to be done, and there will be many bugs. I will be updating this README as I make progress.
-```
+> This is an a very early stage project. There are many things that need to be done, and there will be many bugs. I will be updating this README as I make progress.
 
 ## Table of Contents
 
