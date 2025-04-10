@@ -157,12 +157,25 @@ npm run build-extension
 npx puppeteer browsers install chrome
 ```
 
-6. Start the server
+6. Create your resume schema and import it in `config.ts` under `config.RESUME`
+```ts
+// my-resume.ts
+import { IResume } from "@schemas/resume.schema"
+export const myResume: IResume = {
+  // ...
+}
+```
+
+
+7. *optional* Create your own template
+It is best to have your own unique template. Follow the instructions in [Templates](#templates)
+
+8. Start the server
 ```bash
 npm run start
 ```
 
-7. Open **LinkedIn** and click on jobs
+9. Open **LinkedIn** and click on jobs
 Once you have a job application open, right click and click on 
 `✨ Tailor Resume for job application`
 
