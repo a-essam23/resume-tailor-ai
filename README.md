@@ -166,16 +166,20 @@ export const myResume: IResume = {
 }
 ```
 
+7. Create a `.env` file and add your API key
+```
+API_KEY=your-api-key
+```
 
-7. *optional* Create your own template
+8. *optional* Create your own template
 It is best to have your own unique template. Follow the instructions in [Templates](#templates)
 
-8. Start the server
+9. Start the server
 ```bash
 npm run start
 ```
 
-9. Open **LinkedIn** and click on jobs
+10. Open **LinkedIn** and click on jobs
 Once you have a job application open, right click and click on 
 `✨ Tailor Resume for job application`
 
