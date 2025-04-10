@@ -1,16 +1,16 @@
-# Resume Tailor AI
+# 📄 Resume Tailor AI
 
 An open-source application that automatically tailors resumes for specific job applications using AI analysis. The project combines a browser extension, server-side processing, and PDF generation capabilities.
 
-Job application have become incomprehensibly complex, and AI ATS systems become the standarnd. It is impossible to manually tailor resumes for each job application, and all available solutions are either too expensive or require a lot of manual work.
+Job applications have become incomprehensibly complex, and AI ATS systems have become the standard. It is impossible to manually tailor resumes for each job application, and all available solutions are either too expensive or require significant manual work.
 
- This is an attempt at an open-source solution for all to use.
+This is an attempt at an open-source solution for all to use.
 
-> This is an a very early stage project. There are many things that need to be done, and there will be many bugs. I will be updating this README as I make progress.
+> 🚧 This is a very early stage project. There are many things that need to be done, and there will be many bugs. I will be updating this README as I make progress.
 
 ## Table of Contents
 
-- [Resume Tailor AI](#resume-tailor-ai)
+- [📄 Resume Tailor AI](#-resume-tailor-ai)
   - [Table of Contents](#table-of-contents)
   - [Example](#example)
     - [Job Description](#job-description)
@@ -18,14 +18,14 @@ Job application have become incomprehensibly complex, and AI ATS systems become 
       - [Base Resume](#base-resume)
       - [After AI Tailoring](#after-ai-tailoring)
       - [Modifications](#modifications)
-  - [Features](#features)
-    - [Pipeline](#pipeline)
-  - [Technical Stack](#technical-stack)
+  - [✨ Features](#-features)
+    - [🔄 Pipeline](#-pipeline)
+  - [🛠️ Technical Stack](#️-technical-stack)
   - [Templates](#templates)
   - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-  - [Limitations](#limitations)
+    - [📋 Prerequisites](#-prerequisites)
+    - [🔧 Installation](#-installation)
+  - [⚠️ Limitations](#️-limitations)
 
 ## Example
 
@@ -83,31 +83,31 @@ This is a real listing from LinkedIn with REDACTED company name and href. Full j
 - Prioritized React-related skills and experience
 - Removed UI/UX Design to focus on core technical qualifications
 
-## Features
+## ✨ Features
 
-- **Browser Extension Integration**: Chrome extension that works with LinkedIn job postings
-- **AI-Powered Resume Tailoring**: Uses Google's Generative AI to customize resumes based on job descriptions
-- **Resume Evaluation**: Provides scoring and recommendations for resume improvements (optional)
-- **Template System**: Supports customizable resume templates using Handlebars
-- **PDF Generation**: Automatically generates professionally formatted PDF resumes
+- 🔌 **Browser Extension Integration**: Chrome extension that works with LinkedIn job postings
+- 🤖 **AI-Powered Resume Tailoring**: Uses Google's Generative AI to customize resumes based on job descriptions
+- 📊 **Resume Evaluation**: Provides scoring and recommendations for resume improvements (optional)
+- 🎨 **Template System**: Supports customizable resume templates using Handlebars
+- 📑 **PDF Generation**: Automatically generates professionally formatted PDF resumes
 
-### Pipeline
+### 🔄 Pipeline
 
-1. Job description is scraped by the extension and sent to the server
-2. The server send the original resume + job to be tailored
-3. The tailored resume is verified
-4. The tailored resume is compiled into HTML
-5. The HTML resume is compiled into a PDF
-6. PDF resume is saved at /output
+1. 🔍 Job description is scraped by the extension and sent to the server
+2. 📤 The server send the original resume + job to be tailored
+3. ✅ The tailored resume is verified
+4. 💻 The tailored resume is compiled into HTML
+5. 📝 The HTML resume is compiled into a PDF
+6. 💾 PDF resume is saved at /output
 
-## Technical Stack
+## 🛠️ Technical Stack
 
-- **Backend**: Node.js with Express
-- **AI**: Any LLM service should work. Currently implemented with Gemini because it's free.
-- **PDF Generation**: Puppeteer
-- **Template Engine**: Handlebars
-- **Type Safety**: TypeScript with Zod validation
-- **Browser Extension**: Chrome Extension (Manifest V3)
+- 🖥️ **Backend**: Node.js with Express
+- 🧠 **AI**: Any LLM service should work. Currently implemented with Gemini because it's free.
+- 📄 **PDF Generation**: Puppeteer
+- 🎯 **Template Engine**: Handlebars
+- 🔒 **Type Safety**: TypeScript with Zod validation
+- 🌐 **Browser Extension**: Chrome Extension (Manifest V3)
 
 ## Templates
 
@@ -124,14 +124,14 @@ The process is straight forward. Create a new directory in `templates/` and add 
 
 ## Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 
-- Node.js
-- Chrome Browser (for extension)
+- 📦 Node.js
+- 🌐 Chrome Browser (for extension)
 
-### Installation
+### 🔧 Installation
 
-1. Clone the repository
+1. 📥 Clone the repository
 ```bash
 git clone https://github.com/a-essam23/resume-tailor-ai.git
 ```
@@ -162,11 +162,15 @@ npx puppeteer browsers install chrome
 npm run start
 ```
 
-## Limitations
+7. Open **LinkedIn** and click on jobs
+Once you have a job application open, right click and click on 
+`✨ Tailor Resume for job application`
 
-- The extension only works with LinkedIn job postings
-- The extension only works with Chrome
-- There is currently only 1 theme; however, you can create your own
-- There is no UI for the server or the extension
+## ⚠️ Limitations
 
-**All contributions are welcome!**
+- 🔗 The extension only works with LinkedIn job postings
+- 🌐 The extension only works with Chrome
+- 🎨 There is currently only 1 theme; however, you can create your own
+- 🖥️ There is no UI for the server or the extension
+
+**👋 All contributions are welcome!**
