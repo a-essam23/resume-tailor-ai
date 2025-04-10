@@ -41,7 +41,7 @@ const config: IConfig = {
   MODEL: "gemini-2.0-flash",
 
   RESUME: defaultResume,
-  TEMPLATE: readFileSync("templates/default.hbs", "utf-8"),
+  TEMPLATE: "simple", // Name of the templat's dir inside /templates
   RESUME_OUTPUT_NAME: "resume",
 };
 

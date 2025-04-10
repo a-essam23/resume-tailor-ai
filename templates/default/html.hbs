@@ -1,0 +1,215 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+  </head>
+  <body>
+    <div class="resume">
+      <header class="header">
+        <h1>{{basics.first_name}} {{basics.last_name}}</h1>
+        <p class="label">{{basics.label}}</p>
+        <div class="contact-info">
+          <p><a href="mailto:{{basics.email}}">{{basics.email}}</a></p>
+          {{#if basics.phone}}
+            <p>{{basics.phone}}</p>
+          {{/if}}
+          {{#if basics.url}}
+            <p><a href="{{basics.url}}">{{basics.url}}</a></p>
+          {{/if}}
+          <p class="location">{{basics.location.city}},
+            {{basics.location.region}}</p>
+        </div>
+        {{#if basics.profiles}}
+          <div class="profiles">
+            {{#each basics.profiles}}
+              <a href="{{url}}" target="_blank">{{network}}
+                ({{username}})</a>{{#unless @last}} | {{/unless}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </header>
+      <main>
+        <section class="section summary">
+          <h2>Summary</h2>
+          <p>{{basics.summary}}</p>
+        </section>
+
+        {{#if work}}
+          <section class="section work-experience">
+            <h2>Work Experience</h2>
+            {{#each work}}
+              <div class="item">
+                <h3>{{name}}</h3>
+                <p class="sub-header">{{position}}
+                  |
+                  {{startDate}}
+                  -
+                  {{endDate}}</p>
+                {{#if location}}
+                  <p class="location">{{location}}</p>
+                {{/if}}
+                {{#if highlights}}
+                  <ul>
+                    {{#each highlights}}
+                      <li>{{this}}</li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              </div>
+            {{/each}}
+          </section>
+        {{/if}}
+
+        {{#if education}}
+          <section class="section education">
+            <h2>Education</h2>
+            {{#each education}}
+              <div class="item">
+                <h3>{{institution}}</h3>
+                <p class="sub-header">{{studyType}}
+                  in
+                  {{area}}
+                  |
+                  {{startDate}}
+                  -
+                  {{endDate}}</p>
+                {{#if courses}}
+                  <p class="courses">Courses: {{courses}}</p>
+                {{/if}}
+              </div>
+            {{/each}}
+          </section>
+        {{/if}}
+
+        {{#if skills}}
+          <section class="section skills">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+              {{#each skills}}
+                <li>
+                  <strong>{{name}}</strong>
+                  {{#if keywords}}
+                    <span class="keywords">({{keywords}})</span>
+                  {{/if}}
+                </li>
+              {{/each}}
+            </ul>
+          </section>
+        {{/if}}
+
+        {{#if projects}}
+          <section class="section projects">
+            <h2>Projects</h2>
+            {{#each projects}}
+              <div class="item">
+                <h3>{{name}}</h3>
+                <p class="sub-header">{{startDate}} - {{endDate}}</p>
+                <p>{{description}}</p>
+                {{#if highlights}}
+                  <ul>
+                    {{#each highlights}}
+                      <li>{{this}}</li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              </div>
+            {{/each}}
+          </section>
+        {{/if}}
+
+        <section class="section other-details">
+          {{#if volunteer}}
+            <div class="subsection volunteer-experience">
+              <h3>Volunteer Experience</h3>
+              {{#each volunteer}}
+                <div class="item">
+                  <h4>{{name}}</h4>
+                  <p class="sub-header">{{position}}
+                    |
+                    {{startDate}}
+                    -
+                    {{endDate}}</p>
+                  {{#if highlights}}
+                    <ul>
+                      {{#each highlights}}
+                        <li>{{this}}</li>
+                      {{/each}}
+                    </ul>
+                  {{/if}}
+                </div>
+              {{/each}}
+            </div>
+          {{/if}}
+
+          {{#if awards}}
+            <div class="subsection awards">
+              <h3>Awards</h3>
+              <ul class="list">
+                {{#each awards}}
+                  <li><strong>{{title}}</strong> ({{date}}) - {{awarder}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+
+          {{#if certificates}}
+            <div class="subsection certificates">
+              <h3>Certificates</h3>
+              <ul class="list">
+                {{#each certificates}}
+                  <li><strong>{{name}}</strong> ({{date}}) - {{issuer}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+
+          {{#if publications}}
+            <div class="subsection publications">
+              <h3>Publications</h3>
+              <ul class="list">
+                {{#each publications}}
+                  <li><strong>{{name}}</strong>
+                    -
+                    {{publisher}}
+                    ({{releaseDate}})</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+
+          {{#if languages}}
+            <div class="subsection languages">
+              <h3>Languages</h3>
+              <ul class="list">
+                {{#each languages}}
+                  <li>{{language}}: {{fluency}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+
+          {{#if interests}}
+            <div class="subsection interests">
+              <h3>Interests</h3>
+              <ul class="list">
+                {{#each interests}}
+                  <li>{{name}}: {{keywords}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+
+          {{#if references}}
+            <div class="subsection references">
+              <h3>References</h3>
+              {{#each references}}
+                <p><strong>{{name}}</strong>: {{reference}}</p>
+              {{/each}}
+            </div>
+          {{/if}}
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

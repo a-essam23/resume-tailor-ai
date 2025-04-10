@@ -4,7 +4,8 @@ import { ResumeSchema } from "@/schemas/resume.schema";
 import AppError from "@utils/AppError";
 import config from "config";
 import { log } from "@utils/logger";
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync, copyFileSync } from "fs";
+import path from "path";
 
 export const validateResume = (resume: object) => {
   const validatedResume = ResumeSchema.safeParse(resume);
@@ -22,77 +23,52 @@ export const validateResume = (resume: object) => {
 
 export const compileResume = (
   resume: object,
-  template: any,
+  template: string,
   output_dir: string
 ) => {
-  const compiled = Handlebars.compile(template);
+  const templatePath = path.join(
+    process.cwd(),
+    "templates",
+    template,
+  );
+  const templateContent = readFileSync(`${templatePath}/html.hbs`, "utf-8");
+  const cssContent = readFileSync(`${templatePath}/styles.css`, "utf-8");
+  log.debug(`Compiling resume into html...`);
+
+
+  // Compile template with CSS embedded
+  const compiled = Handlebars.compile(templateContent);
   const context = {
     style: "classic",
     color: "blue",
     ...resume,
   };
-  const htmlOutput = compiled(context);
+  const htmlContent = compiled(context);
+
+  // Inject CSS into HTML
+  const htmlOutput = `<!DOCTYPE html>
+<html>
+<head>
+<style>
+${cssContent}
+</style>
+</head>
+<body>
+${htmlContent}
+</body>
+</html>`;
+
   writeFileSync(`${output_dir}/${config.RESUME_OUTPUT_NAME}.html`, htmlOutput);
+  log.info("Resume compiled successfully!");
   return htmlOutput;
 };
 
 export const generatePDF = async (resume_html: string, output_dir: string) => {
-  // Add comprehensive print CSS
-  const printCSS = `
-<style>
-  @media print {
-    body {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-      font-size: 11pt !important;
-      line-height: 1.4 !important;
-    }
-
-    .container {
-      box-shadow: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-
-    .section {
-      page-break-inside: avoid !important;
-      margin-bottom: 15pt !important;
-    }
-
-    h1 { font-size: 24pt !important; }
-    h2 { font-size: 18pt !important; }
-    h3 { font-size: 14pt !important; }
-
-    a::after {
-      content: "" !important;
-    }
-
-    /* Fix for flex/grid layouts in PDF */
-    .work-header, .education-header {
-      display: block !important;
-    }
-    
-    .date {
-      float: right;
-    }
-  }
-
-  /* Universal box sizing */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  /* Prevent overflow */
-  .container {
-    max-width: 100% !important;
-  }
-</style>
-`;
-
+  log.debug(`Generating pdf...`);
   const browser = await launch();
   const page = await browser.newPage();
 
-  await page.setContent(`${printCSS}${resume_html}`, {
+  await page.setContent(resume_html, {
     waitUntil: "networkidle0",
   });
 
@@ -102,14 +78,7 @@ export const generatePDF = async (resume_html: string, output_dir: string) => {
     path: `${output_dir}/${config.RESUME_OUTPUT_NAME}.pdf`,
     format: "A4",
     printBackground: true,
-    margin: {
-      top: "15mm",
-      right: "15mm",
-      bottom: "15mm",
-      left: "15mm",
-    },
-    scale: 0.8, // Reduce scaling for better fit
   });
-
+  log.info("PDF generated successfully!");
   await browser.close();
 };
