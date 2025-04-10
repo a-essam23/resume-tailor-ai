@@ -43,8 +43,7 @@ function extractJobDescription(node) {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "scrapeJobData") {
-    alert("Received message to scrape job data.");
-    logToServer("Received message to scrape job data.");
+    // logToServer("Received message to scrape job data.");
     const jobTitleElement = document.querySelector(
       ".job-details-jobs-unified-top-card__job-title h1 a"
     );

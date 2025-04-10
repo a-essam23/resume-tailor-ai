@@ -17,6 +17,8 @@ const consoleTransport = new winston.transports.Console({
 const decorators = {
   server: "⚡️",
   ai: "✨",
+  extension: "🌐",
+  verify: "✅",
 };
 
 const logLevels = {

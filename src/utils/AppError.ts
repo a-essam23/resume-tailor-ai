@@ -32,11 +32,14 @@ class AppError extends Error {
     }
 
     // Preserve original error
-    if (options.cause) {
+    if (options.cause || options.details) {
       this.cause = options.cause;
-      this.stack += `\nCaused by: ${options.cause.stack}`;
+      this.stack += `\nCaused by: ${options?.cause?.stack || ""} \n ${
+        options.details || ""
+      }`;
     }
     log.error(this.message);
+    console.log(options.details);
   }
 
   // TypeScript 4.6+ supports native cause property

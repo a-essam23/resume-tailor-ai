@@ -1,10 +1,22 @@
 import config from "@config";
 import app from "app";
 import { log } from "@utils/logger";
-import { compileResume, generatePDF } from "@services/resume.service";
-// app.listen(config.PORT, () => {
-//   log.info(`Server running on port ${config.PORT}`, "server");
-// });
+import { verifyPuppeteerSetup } from "@utils/verify-puppeteer";
 
-const html = compileResume(config.RESUME, config.TEMPLATE, config.OUTPUT_DIR)
-generatePDF(html, config.OUTPUT_DIR);
+Promise.all([verifyPuppeteerSetup()])
+  .then(() => {
+    app.listen(config.PORT, () => {
+      log.info(`Server running on port ${config.PORT}`, "server");
+    });
+  })
+  .catch((error) => {
+    log.error(error, "server");
+  });
+
+process.on("uncaughtException", (error) => {
+  log.error(error as unknown as string, "uncaughtException");
+});
+
+process.on("unhandledRejection", (error) => {
+  log.error(error as unknown as string, "unhandledRejection");
+});

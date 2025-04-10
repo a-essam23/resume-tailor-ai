@@ -1,10 +1,10 @@
 import { launch } from "puppeteer";
 import Handlebars from "handlebars";
-import { ResumeSchema } from "@/schemas/resume.schema";
+import { IResume, ResumeSchema } from "@/schemas/resume.schema";
 import AppError from "@utils/AppError";
 import config from "config";
 import { log } from "@utils/logger";
-import { readFileSync, writeFileSync, copyFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import path from "path";
 
 export const validateResume = (resume: object) => {
@@ -17,24 +17,19 @@ export const validateResume = (resume: object) => {
       code: "RESUME_VALIDATION_FAILED",
       details: validatedResume.error.issues,
     });
-  log.debug("Resume is correct!");
+  log.debug("Resume is correct!", "verify");
   return validatedResume.data;
 };
 
 export const compileResume = (
-  resume: object,
+  resume: IResume,
   template: string,
   output_dir: string
 ) => {
-  const templatePath = path.join(
-    process.cwd(),
-    "templates",
-    template,
-  );
+  const templatePath = path.join(process.cwd(), "templates", template);
   const templateContent = readFileSync(`${templatePath}/html.hbs`, "utf-8");
   const cssContent = readFileSync(`${templatePath}/styles.css`, "utf-8");
   log.debug(`Compiling resume into html...`);
-
 
   // Compile template with CSS embedded
   const compiled = Handlebars.compile(templateContent);
@@ -78,6 +73,7 @@ export const generatePDF = async (resume_html: string, output_dir: string) => {
     path: `${output_dir}/${config.RESUME_OUTPUT_NAME}.pdf`,
     format: "A4",
     printBackground: true,
+    waitForFonts: true,
   });
   log.info("PDF generated successfully!");
   await browser.close();

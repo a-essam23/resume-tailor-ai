@@ -1,6 +1,6 @@
 import { IResume } from "@schemas/resume.schema";
 
-const defaultResume: IResume = {
+const exampleResume: IResume = {
   basics: {
     first_name: "Jane",
     last_name: "Doe",
@@ -147,4 +147,4 @@ const defaultResume: IResume = {
     },
   ],
 };
-export default defaultResume;
+export default exampleResume;

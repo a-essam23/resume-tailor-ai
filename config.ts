@@ -1,11 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
-import defaultResume from "@assets/mock-resume";
+import exampleResume from "@assets/example-resume";
 import { ModelParams } from "@google/generative-ai";
 import AppError from "@utils/AppError";
-import { existsSync, mkdirSync, readFileSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
 import { IResume } from "@schemas/resume.schema";
-import { IAdjustmentControls } from "@schemas/controls.schema";
 
 interface IConfig {
   NODE_ENV: string;
@@ -14,7 +13,6 @@ interface IConfig {
 
   API_KEY: string;
   MODEL: ModelParams["model"];
-  controls: IAdjustmentControls;
 
   RESUME: IResume;
   TEMPLATE: string;
@@ -25,23 +23,11 @@ const config: IConfig = {
   OUTPUT_DIR: "output",
   PORT: 3100,
 
-  controls: {
-    experience: {
-      maxYearsIncrease: 0.15, // Allow 15% experience boost
-      allowTitlePromotion: true,
-    },
-    skills: {
-      maxNewSkills: 2,
-      requiredMatchThreshold: 0.6,
-    },
-    education: { allowDegreeEnhancement: true },
-  },
-
   API_KEY: process.env.API_KEY!,
   MODEL: "gemini-2.0-flash",
 
-  RESUME: defaultResume,
-  TEMPLATE: "simple", // Name of the templat's dir inside /templates
+  RESUME: exampleResume,
+  TEMPLATE: "default", // Name of the templat's dir inside /templates
   RESUME_OUTPUT_NAME: "resume",
 };
 

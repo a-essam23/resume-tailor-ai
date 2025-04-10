@@ -13,13 +13,12 @@ import { generateContent } from "./generate.service";
 import config from "@config";
 import { createNewDir } from "@helpers/fs.helpers";
 import { evaluateResume } from "./evaluation.service";
-import { IPrompt, prompt_1 } from "@prompts/tailor.prompts";
+import { IPrompt, tailorPrompts } from "@prompts/tailor.prompts";
 
 interface IGeneratedResumeResponse {
   adjustedResume: IResume;
   changeLog: {
-    experienceModifications: string[];
-    skillAdditions: string[];
+    modifications: string[];
     warnings: string[];
   };
 }
@@ -33,9 +32,30 @@ export const generateTailoredResume = async (
       .toLowerCase()
       .replaceAll(" ", "-")}-${Date.now()}`
   );
-  const tResume = await requestTailoredResume(prompt_1, jobApplication, resume);
+  const tResume = await requestTailoredResume(
+    tailorPrompts[0],
+    jobApplication,
+    resume
+  );
   writeFileSync(`${out_dir}/_resume.json`, JSON.stringify(tResume, null, 2));
-
+  writeFileSync(
+    `${out_dir}/_job.json`,
+    JSON.stringify(jobApplication, null, 2)
+  );
+  if (tResume.changeLog.modifications.length > 0)
+    log.verbose(
+      `Modifications:\n ${tResume.changeLog.modifications
+        .map((s) => `• ${s}`)
+        .join("\n ")}`,
+      "ai"
+    );
+  if (tResume.changeLog.warnings.length > 0)
+    log.warn(
+      `Resume warnings:\n ${tResume.changeLog.warnings
+        .map((s) => `• ${s}`)
+        .join("\n ")}`,
+      "ai"
+    );
   return tResume;
 };
 

@@ -26,7 +26,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "tailorResume") {
     // Get the tab ID where the context menu was clicked
     const tabId = tab.id;
-    logToServer(""); // Test 3: Context Menu Clicked
     chrome.tabs.sendMessage(tabId, { action: "scrapeJobData" }, (response) => {
       if (chrome.runtime.lastError) {
         logToServer(

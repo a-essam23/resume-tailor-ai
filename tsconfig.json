@@ -7,6 +7,9 @@
     "moduleResolution": "Node",
     "baseUrl": "./",
     "paths": {
+      "@controllers/*": ["src/controllers/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@routes/*": ["src/routes/*"],
       "@prompts/*": ["src/prompts/*"],
       "@helpers/*": ["src/helpers/*"],
       "@schemas/*": ["src/schemas/*"],
