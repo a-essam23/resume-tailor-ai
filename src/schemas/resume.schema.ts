@@ -3,7 +3,7 @@ import { z } from "zod";
 // will be used when prompting to ensure perfect output
 export const resumeSchemaString = `resume{basics{first_name:string,last_name:string,label:string,image?:string,email:string,phone?:string,url?:string,summary:string,location{address:string,postalCode:string,city:string,countryCode:string,region:string},profiles?:[{network:string,username:string,url:string}]},work?:[{name:string,description?:string,position:string,location?:string,url?:string,startDate:string,endDate?:string,summary?:string,highlights:[string]}],volunteer?:sameaswork],education:{institution:string,url?:string,area:string,studyType:string,startDate:string,endDate?:string,score?:number,courses:string]}],awards?:[{title:string,date:string,awarder:string,summary:string}],certificates?:[{name:string,date:string,issuer:string,url?:string}],publications?:[{name:string,publisher:string,releaseDate:string,url?:string,summary:string}],skills:[{name:string,level:"Beginner"|"Intermediate"|"Advanced"|"Master",keywords:[string]}],languages:[{language:string,fluency:string}],interests?:[{name:string,keywords:string]],references?:[{name:string,reference:string}],projects?:[{name:string,startDate:string,endDate?:string,description:string,highlights:[string],url?:string,keywords?:[string],type?:string,roles?:[string]}]}`;
 
-const DateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+const DateSchema = z.string().regex(/^\d{4}(-\d{2}(-\d{2})?)?$/);
 const UrlSchema = z.string().url();
 const PhoneSchema = z
   .string()
@@ -12,11 +12,11 @@ const PhoneSchema = z
   );
 
 const LocationSchema = z.object({
-  address: z.string(),
-  postalCode: z.string(),
-  city: z.string(),
-  countryCode: z.string().length(2),
-  region: z.string(),
+  address: z.string().optional(),
+  postalCode: z.string().optional(),
+  city: z.string().optional(),
+  countryCode: z.string().length(2).optional(),
+  region: z.string().optional(),
 });
 
 const ProfileSchema = z.object({
@@ -54,11 +54,11 @@ const EducationSchema = z.object({
   institution: z.string(),
   url: UrlSchema.optional(),
   area: z.string(),
-  studyType: z.string(),
+  studyType: z.string().optional(),
   startDate: DateSchema,
   endDate: DateSchema.optional(),
   score: z.number().min(0).max(4).optional(),
-  courses: z.array(z.string()),
+  courses: z.array(z.string()).optional(),
 });
 
 const AwardSchema = z.object({
@@ -96,7 +96,7 @@ const LanguageSchema = z.object({
 
 const ProjectSchema = z.object({
   name: z.string(),
-  startDate: DateSchema,
+  startDate: DateSchema.optional(),
   endDate: DateSchema.optional(),
   description: z.string(),
   highlights: z.array(z.string()),
@@ -121,12 +121,12 @@ export const ResumeSchema = z.object({
   basics: BasicsSchema,
   work: z.array(WorkExperienceSchema).optional(),
   volunteer: z.array(WorkExperienceSchema).optional(),
-  education: z.array(EducationSchema),
+  education: z.array(EducationSchema).optional(),
   awards: z.array(AwardSchema).optional(),
   certificates: z.array(CertificateSchema).optional(),
   publications: z.array(PublicationSchema).optional(),
-  skills: z.array(SkillSchema),
-  languages: z.array(LanguageSchema),
+  skills: z.array(SkillSchema).optional(),
+  languages: z.array(LanguageSchema).optional(),
   interests: z.array(InterestSchema).optional(),
   references: z.array(ReferenceSchema).optional(),
   projects: z.array(ProjectSchema).optional(),
