@@ -6,6 +6,7 @@ import config from "config";
 import { log } from "@utils/logger";
 import { readFileSync, writeFileSync } from "fs";
 import path from "path";
+import { getPage } from "./browser.service";
 
 export const validateResume = (resume: object) => {
   const validatedResume = ResumeSchema.safeParse(resume);
@@ -17,7 +18,7 @@ export const validateResume = (resume: object) => {
       code: "RESUME_VALIDATION_FAILED",
       details: validatedResume.error.issues,
     });
-  log.debug("Resume is correct!", "verify");
+  log.debug("Resume validated successfully!", "verify");
   return validatedResume.data;
 };
 
@@ -60,9 +61,7 @@ ${htmlContent}
 
 export const generatePDF = async (resume_html: string, output_dir: string) => {
   log.debug(`Generating pdf...`);
-  const browser = await launch();
-  const page = await browser.newPage();
-
+  const page = await getPage();
   await page.setContent(resume_html, {
     waitUntil: "networkidle0",
   });
@@ -76,5 +75,4 @@ export const generatePDF = async (resume_html: string, output_dir: string) => {
     waitForFonts: true,
   });
   log.info("PDF generated successfully!");
-  await browser.close();
 };

@@ -1,7 +1,7 @@
 import config from "@config";
 import app from "app";
 import { log } from "@utils/logger";
-import { verifyPuppeteerSetup } from "@utils/verify-puppeteer";
+import { browserInstance, verifyPuppeteerSetup } from "@utils/verify-puppeteer";
 
 Promise.all([verifyPuppeteerSetup()])
   .then(() => {
@@ -19,4 +19,9 @@ process.on("uncaughtException", (error) => {
 
 process.on("unhandledRejection", (error) => {
   log.error(error as unknown as string, "unhandledRejection");
+});
+
+process.on("exit", () => {
+  browserInstance.close(); // Close the browser inst
+  log.info("Exiting...", "exit");
 });

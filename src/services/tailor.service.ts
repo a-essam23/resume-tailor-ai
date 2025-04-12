@@ -13,22 +13,20 @@ import { generateContent } from "./generate.service";
 import config from "@config";
 import { createNewDir } from "@helpers/fs.helpers";
 import { evaluateResume } from "./evaluation.service";
-import { IPrompt, tailorPrompts } from "@prompts/tailor.prompts";
-
-interface IGeneratedResumeResponse {
-  adjustedResume: IResume;
-  changeLog: {
-    modifications: string[];
-    warnings: string[];
-  };
-}
+import {
+  IGenerateResumePrompt,
+  IGenerateResumeResponse,
+  tailorPrompts,
+} from "@prompts/tailor.prompts";
 
 export const generateTailoredResume = async (
   jobApplication: IJobApplication,
   resume: IResume
-): Promise<IGeneratedResumeResponse> => {
+): Promise<IGenerateResumeResponse> => {
   const out_dir = createNewDir(
-    `${config.OUTPUT_DIR}/${jobApplication.company}_${jobApplication.title
+    `${config.OUTPUT_DIR}/temp/${jobApplication.company
+      .toLowerCase()
+      .replace(" ", "-")}_${jobApplication.title
       .toLowerCase()
       .replaceAll(" ", "-")}-${Date.now()}`
   );
@@ -42,11 +40,16 @@ export const generateTailoredResume = async (
     `${out_dir}/_job.json`,
     JSON.stringify(jobApplication, null, 2)
   );
+  log.info(
+    `Resume compatability improved from ${tResume.compatatibilityScoreBefore} to ${tResume.compatatibilityScoreAfter}`,
+    "ai"
+  );
   if (tResume.changeLog.modifications.length > 0)
     log.verbose(
-      `Modifications:\n ${tResume.changeLog.modifications
-        .map((s) => `• ${s}`)
-        .join("\n ")}`,
+      [
+        "Modifications:",
+        ...tResume.changeLog.modifications.map((mod) => `  • ${mod}`),
+      ].join("\n"),
       "ai"
     );
   if (tResume.changeLog.warnings.length > 0)
@@ -60,16 +63,16 @@ export const generateTailoredResume = async (
 };
 
 const requestTailoredResume = async (
-  prompt: IPrompt,
+  prompt: IGenerateResumePrompt,
   job: IJobApplication,
   resume: IResume
-): Promise<IGeneratedResumeResponse> => {
+): Promise<IGenerateResumeResponse> => {
   // assign resume and job application to prompt
   prompt.message = prompt.message
     .replace("{{resume}}", JSON.stringify(resume, null, 2))
     .replace("{{job}}", JSON.stringify(job, null, 2));
   log.debug(`Tailoring resume for ${job.title} at ${job.company}`, "ai");
-  let tailoredResume: string | IGeneratedResumeResponse = (
+  let tailoredResume: string | IGenerateResumeResponse = (
     await generateContent(prompt.message, prompt.system)
   ).response
     .text()
@@ -77,7 +80,7 @@ const requestTailoredResume = async (
     .replace("```", "");
 
   try {
-    tailoredResume = JSON.parse(tailoredResume) as IGeneratedResumeResponse;
+    tailoredResume = JSON.parse(tailoredResume) as IGenerateResumeResponse;
     validateResume(tailoredResume.adjustedResume);
   } catch (e: any) {
     throw new AppError(e.message, { cause: e });
@@ -87,7 +90,7 @@ const requestTailoredResume = async (
 };
 
 export const compareResumePrompts = async (
-  prompts: IPrompt[],
+  prompts: IGenerateResumePrompt[],
   job: IJobApplication,
   resume: IResume
 ) => {

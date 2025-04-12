@@ -19,6 +19,7 @@ const decorators = {
   ai: "✨",
   extension: "🌐",
   verify: "✅",
+  preloading: "⚙️ ",
 };
 
 const logLevels = {
@@ -42,7 +43,7 @@ const logger = winston.createLogger({
 });
 
 const _log = (type: keyof typeof logLevels, message: string, task?: string) => {
-  const decorator = task ? decorators[task as keyof typeof decorators] : "";
+  const decorator = task ? decorators[task as keyof typeof decorators] : " ";
   logger.log(type, {
     message,
     decorator,

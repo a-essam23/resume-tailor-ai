@@ -1,8 +1,8 @@
-import puppeteer from "puppeteer";
-import { existsSync } from "fs";
-import { join } from "path";
+import puppeteer, { Browser } from "puppeteer";
 import { log } from "./logger";
 import AppError from "./AppError";
+
+export let browserInstance: Browser;
 
 interface PuppeteerVerificationResult {
   isSetupCorrect: boolean;
@@ -27,18 +27,17 @@ export async function verifyPuppeteerSetup(): Promise<PuppeteerVerificationResul
     result.details.puppeteerInstalled = true;
 
     // Try launching browser
-    const browser = await puppeteer.launch({
+    browserInstance = await puppeteer.launch({
       headless: true,
     });
     result.details.browserLaunchable = true;
-    await browser.close();
 
     // If all checks pass, setup is correct
     result.isSetupCorrect = Object.values(result.details).every(
       (value) => value === true
     );
     if (result.isSetupCorrect) {
-      log.debug("Puppeteer setup verified", "verify");
+      log.debug("Puppeteer setup verified", "preloading");
     } else {
       throw new AppError("Puppeteer setup is incorrect", {
         details: result.details,

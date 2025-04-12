@@ -3,8 +3,8 @@ dotenv.config();
 import exampleResume from "@assets/example-resume";
 import { ModelParams } from "@google/generative-ai";
 import AppError from "@utils/AppError";
-import { existsSync, mkdirSync, readFileSync } from "fs";
-import { IResume, ResumeSchema } from "@schemas/resume.schema";
+import { existsSync, mkdirSync } from "fs";
+import { IResume } from "@schemas/resume.schema";
 import { log } from "@utils/logger";
 import { validateResume } from "@services/resume.service";
 
@@ -40,9 +40,9 @@ if (!config.API_KEY) throw new AppError("API_KEY is not set");
 // Check if resume in .env
 if (process.env.RESUME) {
   if (process.env.RESUME)
-    log.debug(`Found resume in .env file: ${process.env.RESUME}`);
+    log.debug(`Found resume in .env file: ${process.env.RESUME}`, "preloading");
   const resume = require(process.env.RESUME).default as IResume;
-  if (resume) log.debug(`Loaded resume`);
+  if (resume) log.debug(`Loaded resume`, "preloading");
   validateResume(resume); // Check if resume is valid
   config.RESUME = resume;
 }
